@@ -1,0 +1,15 @@
+@import "./mixins/flexBox.scss";
+@import "./table.scss";
+@import "./modal.scss";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 125%;
+}
+
+body {
+  background-color: #f4f8fd;
+  @include flexBox(row, center, flex-start, 1rem);
+}

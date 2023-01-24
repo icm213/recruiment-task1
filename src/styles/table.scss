@@ -1,0 +1,22 @@
+@import "./mixins/flexBox.scss";
+
+.table--wraper {
+  @include flexBox(row, center, flex-start, 1rem);
+  min-height: 20rem;
+  max-width: 66rem;
+  width: 80vw;
+
+  .table--body .table--item {
+    filter: brightness(100%);
+    transition: all 0.3s;
+  }
+
+  .table--body:hover .table--item {
+    transition: all 0.3s;
+    filter: brightness(70%);
+  }
+  .table--body .table--item:hover {
+    transition: all 0.3s;
+    filter: brightness(100%);
+  }
+}
