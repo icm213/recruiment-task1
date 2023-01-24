@@ -3,6 +3,7 @@ import { paginationElems } from "../methods/paginationElems";
 import "../styles/pagination.scss";
 import { Pagination } from "@mui/material";
 import { productsCount } from "../interfaces/productsCount";
+// import { changePage } from "../methods/changePage";
 
 const PaginationEl: React.FC<productsCount> = (props) => {
   const [paginationPages, setPaginationPages] = useState<number>(0);
@@ -15,7 +16,7 @@ const PaginationEl: React.FC<productsCount> = (props) => {
     event: React.ChangeEvent<unknown>,
     page: number
   ) => void = (e, page) => {
-    console.log(e, page);
+    props.displayCurrentPage(page);
   };
 
   return (
