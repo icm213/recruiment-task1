@@ -25,7 +25,7 @@ const ProductTable: React.FC<tablePage> = (props) => {
   return (
     <div className="table--wraper">
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 350 }} aria-label="simple table">
+        <Table sx={{ minWidth: 300 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="left">Name</TableCell>

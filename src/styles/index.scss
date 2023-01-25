@@ -6,10 +6,16 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-size: 125%;
+  font-size: 62.5%;
 }
 
 body {
   background-color: #f4f8fd;
   @include flexBox(row, center, flex-start, 1rem);
 }
+
+p {
+  font-size: 1rem;
+}
+
+@import "./media.scss";
