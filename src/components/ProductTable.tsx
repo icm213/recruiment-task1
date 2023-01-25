@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { tablePage } from "../interfaces/tablePage";
 import { tableProduct } from "../interfaces/tableProduct";
+import { handleProductName } from "../methods/handleProductName";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -20,7 +21,7 @@ const ProductTable: React.FC<tablePage> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.tablePage]);
 
-  console.log(products);
+  // console.log(products);
 
   return (
     <div className="table--wraper">
@@ -35,19 +36,19 @@ const ProductTable: React.FC<tablePage> = (props) => {
           </TableHead>
           <TableBody className="table--body">
             {products.map((product) => {
-              const splitted = product.name.split(" ");
-              for (let i = 0; i < splitted.length; i++) {
-                splitted[i] =
-                  splitted[i][0].toUpperCase() + splitted[i].slice(1);
-              }
-              const joined = splitted.join(" ");
               return (
                 <TableRow
+                  onClick={() => {
+                    props.toggleModal();
+                    props.passProduct(product);
+                  }}
                   key={product.id}
                   className="table--item"
                   style={{ backgroundColor: `${product.color}70` }}
                 >
-                  <TableCell align="left">{joined}</TableCell>
+                  <TableCell align="left">
+                    {handleProductName(product.name)}
+                  </TableCell>
                   <TableCell align="center">{product.id}</TableCell>
                   <TableCell align="center">{product.year}</TableCell>
                 </TableRow>

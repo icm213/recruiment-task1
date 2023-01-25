@@ -13,9 +13,10 @@ const App: React.FC = () => {
     id: 0,
     name: "",
     year: 0,
-    color: "rtyherth",
+    color: "",
     pantone_value: "",
   });
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     fetch("https://reqres.in/api/products")
@@ -29,18 +30,28 @@ const App: React.FC = () => {
     setCurrentPage((prev) => page);
   };
 
-  const takeCurrentProduct = (productObj:tableProduct)=>{
-    setCurrentProduct(prev=>productObj)
-  }
+  const takeCurrentProduct = (productObj: tableProduct) => {
+    setCurrentProduct((prev) => productObj);
+  };
+
+  const toggleModal = () => {
+    setShowModal((prev) => !prev);
+  };
+
+  console.log(currentProduct);
 
   return (
     <div>
-      <ProductTable tablePage={currentPage} />
+      <ProductTable
+        tablePage={currentPage}
+        passProduct={takeCurrentProduct}
+        toggleModal={toggleModal}
+      />
       <PaginationEl
         displayCurrentPage={displayCurrentPage}
         productsCount={totalProducts}
       />
-      <Modal {...currentProduct} />
+      {showModal && <Modal toggleModal={toggleModal} {...currentProduct} />}
     </div>
   );
 };

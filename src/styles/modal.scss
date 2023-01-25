@@ -1,3 +1,5 @@
+@import "./mixins/flexBox.scss";
+
 .modal--bg {
   position: absolute;
   top: 0;
@@ -16,19 +18,24 @@
     font-size: 4rem;
   }
   .modal {
+    @include flexBox(row, space-evenly, center, 1rem);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40rem;
+    min-width: 40vw;
+    max-width: 65vw;
     background-color: #e4effa;
     border: 2px solid rgba(0, 0, 0, 0.4);
-    border-radius: 0.2rem;
+    border-radius: 0.4rem;
     box-shadow: 24;
     ul {
       li {
         padding: 0.5rem;
         font-size: 1.4rem;
+      }
+      li:not(:last-child) {
+        border-bottom: solid 1px rgba(0, 0, 0, 0.4);
       }
     }
   }
