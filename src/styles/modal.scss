@@ -1,10 +1,35 @@
-.modal {
+.modal--bg {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 40rem;
-  background-color: #e4effa;
-  border: 2px solid #000;
-  box-shadow: 24;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  width: 100vw;
+  max-height: 100%;
+  height: 100vh;
+  background-color: rgba(87, 87, 2, 0.6);
+  backdrop-filter: blur(4px);
+  .MuiSvgIcon-fontSizeMedium {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 2rem;
+    font-size: 4rem;
+  }
+  .modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40rem;
+    background-color: #e4effa;
+    border: 2px solid rgba(0, 0, 0, 0.4);
+    border-radius: 0.2rem;
+    box-shadow: 24;
+    ul {
+      li {
+        padding: 0.5rem;
+        font-size: 1.4rem;
+      }
+    }
+  }
 }
