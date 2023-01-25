@@ -20,7 +20,7 @@ const ProductTable: React.FC<tablePage> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.tablePage]);
 
-  console.log("products: ", products, "current page: ", props.tablePage);
+  console.log(products);
 
   return (
     <div className="table--wraper">

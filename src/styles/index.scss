@@ -1,17 +1,18 @@
 @import "./mixins/flexBox.scss";
 @import "./table.scss";
 @import "./modal.scss";
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-size: 62.5%;
-}
+@import "./pagination.scss";
+@import "./reset.scss";
 
 body {
+  position: relative;
   background-color: #f4f8fd;
+  font-size: 1rem;
   @include flexBox(row, center, flex-start, 1rem);
+  max-width: 100%;
+  width: 100vw;
+  max-height: 100%;
+  height: 100vh;
 }
 
 p {
