@@ -7,6 +7,7 @@
 body {
   position: relative;
   background-color: #f4f8fd;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
   font-size: 1rem;
   @include flexBox(row, center, flex-start, 1rem);
   max-width: 100%;
