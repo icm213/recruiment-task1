@@ -51,8 +51,9 @@ const App: React.FC = () => {
 
   const handleClickForm = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    if (!inputValue) return;
+    if (typeof inputValue !== "number") return;
     setFetchExactProduct((prev) => inputValue);
+    setInputValue((prev) => "");
   };
 
   console.log(fetchExactProduct);

@@ -17,8 +17,20 @@ const ProductTable: React.FC<tablePage> = (props) => {
   useEffect(() => {
     if (props.fetchExactProduct) {
       fetch(`https://reqres.in/api/products/${props.fetchExactProduct}`)
-        .then((res) => res.json())
-        .then((data) => setProducts((prev) => [data.data]));
+        .then((res) => {
+          if (!res.ok) {
+            throw new Error("Network response was not OK");
+          }
+          return res.json();
+        })
+        .then((data) => setProducts((prev) => [data.data]))
+        .catch((error) => {
+          console.error(
+            "There has been a problem with your fetch operation:",
+            error
+          );
+          alert(`There has been a problem with your fetch operation: ${error}`);
+        });
     }
   }, [props.fetchExactProduct]);
 
