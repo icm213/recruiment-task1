@@ -1,8 +1,10 @@
 @import "./mixins/flexBox.scss";
+@import "App.scss";
 @import "./table.scss";
 @import "./modal.scss";
 @import "./pagination.scss";
 @import "./reset.scss";
+@import "./Input.scss";
 
 body {
   position: relative;
