@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import PaginationEl from "./components/PaginationEl";
 import ProductTable from "./components/ProductTable";
 import Modal from "./components/Modal";
+import Input from "./components/Input";
 import "./styles/index.scss";
-import "./interfaces/tableProduct";
+import { Button } from "@mui/material";
 import { tableProduct } from "./interfaces/tableProduct";
 
 const App: React.FC = () => {
@@ -17,6 +18,10 @@ const App: React.FC = () => {
     pantone_value: "",
   });
   const [showModal, setShowModal] = useState(false);
+  const [inputValue, setInputValue] = useState<number | string>("");
+  const [fetchExactProduct, setFetchExactProduct] = useState<number | string>(
+    0
+  );
 
   useEffect(() => {
     fetch("https://reqres.in/api/products")
@@ -26,11 +31,11 @@ const App: React.FC = () => {
       });
   }, []);
 
-  const displayCurrentPage = (page: number) => {
+  const displayCurrentPageFromPagination = (page: number) => {
     setCurrentPage((prev) => page);
   };
 
-  const takeCurrentProduct = (productObj: tableProduct) => {
+  const takeCurrentProductForModal = (productObj: tableProduct) => {
     setCurrentProduct((prev) => productObj);
   };
 
@@ -38,17 +43,36 @@ const App: React.FC = () => {
     setShowModal((prev) => !prev);
   };
 
-  console.log(currentProduct);
+  const handleChange = (e: { target: { value: string } }) => {
+    setInputValue((prev) => {
+      return parseInt(e.target.value) ? parseInt(e.target.value) : "";
+    });
+  };
+
+  const handleClickForm = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    if (!inputValue) return;
+    setFetchExactProduct((prev) => inputValue);
+  };
+
+  console.log(fetchExactProduct);
 
   return (
-    <div>
+    <div className="wraper">
+      <form className="input--wraper" onSubmit={handleClickForm}>
+        <Input handleChange={handleChange} inputValue={inputValue} />
+        <Button variant="outlined" type="submit">
+          Search
+        </Button>
+      </form>
       <ProductTable
+        fetchExactProduct={fetchExactProduct}
         tablePage={currentPage}
-        passProduct={takeCurrentProduct}
+        passProduct={takeCurrentProductForModal}
         toggleModal={toggleModal}
       />
       <PaginationEl
-        displayCurrentPage={displayCurrentPage}
+        displayCurrentPage={displayCurrentPageFromPagination}
         productsCount={totalProducts}
       />
       {showModal && <Modal toggleModal={toggleModal} {...currentProduct} />}

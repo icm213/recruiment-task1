@@ -15,18 +15,24 @@ const ProductTable: React.FC<tablePage> = (props) => {
   const [products, setProducts] = useState<tableProduct[]>([]);
 
   useEffect(() => {
+    if (props.fetchExactProduct) {
+      fetch(`https://reqres.in/api/products/${props.fetchExactProduct}`)
+        .then((res) => res.json())
+        .then((data) => setProducts((prev) => [data.data]));
+    }
+  }, [props.fetchExactProduct]);
+
+  useEffect(() => {
     fetch(`https://reqres.in/api/products?per_page=5&page=${props.tablePage}`)
       .then((res) => res.json())
       .then((data) => setProducts((prev) => data.data));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.tablePage]);
 
-  // console.log(products);
-
   return (
     <div className="table--wraper">
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 300 }} aria-label="simple table">
+        <Table sx={{ minWidth: 280 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="left">Name</TableCell>

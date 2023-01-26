@@ -1,0 +1,17 @@
+@import "./mixins/flexBox.scss";
+.input--wraper {
+  @include flexBox(row, space-evenly, center, 1rem);
+  input {
+    width: auto;
+    max-width: 100%;
+    font-size: 1rem;
+    border-radius: 0.2rem;
+    padding: 0.35rem 0.6rem;
+    color: rgb(69, 69, 69);
+  }
+  button {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: rgb(84, 84, 84);
+  }
+}
