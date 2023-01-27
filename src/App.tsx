@@ -5,12 +5,12 @@ import Modal from "./components/Modal";
 import Input from "./components/Input";
 import "./styles/index.scss";
 import { Button } from "@mui/material";
-import { tableProduct } from "./interfaces/tableProduct";
+import { PassProductData } from "./interfaces/PassProductData";
 
 const App: React.FC = () => {
   const [totalProducts, setTotalProducts] = useState<number>(0);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentProduct, setCurrentProduct] = useState<tableProduct>({
+  const [currentProduct, setCurrentProduct] = useState<PassProductData>({
     id: 0,
     name: "",
     year: 0,
@@ -18,10 +18,8 @@ const App: React.FC = () => {
     pantone_value: "",
   });
   const [showModal, setShowModal] = useState(false);
-  const [inputValue, setInputValue] = useState<number | string>("");
-  const [fetchExactProduct, setFetchExactProduct] = useState<number | string>(
-    0
-  );
+  const [inputValue, setInputValue] = useState<string>("");
+  const [fetchExactProduct, setFetchExactProduct] = useState<number>(0);
 
   useEffect(() => {
     fetch("https://reqres.in/api/products")
@@ -35,7 +33,7 @@ const App: React.FC = () => {
     setCurrentPage((prev) => page);
   };
 
-  const takeCurrentProductForModal = (productObj: tableProduct) => {
+  const takeCurrentProductForModal = (productObj: PassProductData) => {
     setCurrentProduct((prev) => productObj);
   };
 
@@ -44,19 +42,14 @@ const App: React.FC = () => {
   };
 
   const handleChange = (e: { target: { value: string } }) => {
-    setInputValue((prev) => {
-      return parseInt(e.target.value) ? parseInt(e.target.value) : "";
-    });
+    setInputValue((prev) => e.target.value);
   };
 
   const handleClickForm = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    if (typeof inputValue !== "number") return;
-    setFetchExactProduct((prev) => inputValue);
+    setFetchExactProduct((prev) => parseFloat(inputValue));
     setInputValue((prev) => "");
   };
-
-  console.log(fetchExactProduct);
 
   return (
     <div className="wraper">
@@ -71,6 +64,8 @@ const App: React.FC = () => {
         tablePage={currentPage}
         passProduct={takeCurrentProductForModal}
         toggleModal={toggleModal}
+        productsCount={totalProducts}
+
       />
       <PaginationEl
         displayCurrentPage={displayCurrentPageFromPagination}

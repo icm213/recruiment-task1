@@ -1,16 +1,15 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
-import { InputData } from "../interfaces/inputData";
+import { PassInputData } from "../interfaces/PassInputData";
 
-const Input: React.FC<InputData> = (props) => {
-  // bug in firefox - input value shows values of type string ?????????????????????????????????????????????????
-
+const Input: React.FC<PassInputData> = (props) => {
   return (
     <TextField
       onChange={props.handleChange}
       value={props.inputValue}
       type="number"
       label="Type Product ID:"
+      InputProps={{ inputProps: { min: 1, max: 12 } }}
     />
   );
 };

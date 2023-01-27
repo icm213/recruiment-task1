@@ -1,11 +1,11 @@
 import React from "react";
 import { handleProductName } from "../methods/handleProductName";
 
-import { passDataToModal } from "../interfaces/passDataToModal";
+import { PassProductData } from "../interfaces/PassProductData";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
-const Modal: React.FC<passDataToModal> = (props) => {
+const Modal: React.FC<PassProductData> = (props) => {
   return (
-    <div className="modal--bg">
+    <div className="modal--bg" style={{ backgroundColor: `${props.color}30` }}>
       <div className="modal--close">
         <CloseRoundedIcon onClick={props.toggleModal} />
       </div>

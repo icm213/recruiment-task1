@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { tablePage } from "../interfaces/tablePage";
-import { tableProduct } from "../interfaces/tableProduct";
+import { CreateTable } from "../interfaces/CreateTable";
+import { PassProductData } from "../interfaces/PassProductData";
 import { handleProductName } from "../methods/handleProductName";
-
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -11,24 +10,21 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-const ProductTable: React.FC<tablePage> = (props) => {
-  const [products, setProducts] = useState<tableProduct[]>([]);
+const ProductTable: React.FC<CreateTable> = (props) => {
+  const [products, setProducts] = useState<PassProductData[]>([]);
 
   useEffect(() => {
     if (props.fetchExactProduct) {
       fetch(`https://reqres.in/api/products/${props.fetchExactProduct}`)
         .then((res) => {
           if (!res.ok) {
-            throw new Error("Network response was not OK");
+            throw new Error(`${res.status}`);
           }
           return res.json();
         })
         .then((data) => setProducts((prev) => [data.data]))
         .catch((error) => {
-          console.error(
-            "There has been a problem with your fetch operation:",
-            error
-          );
+          console.error(error);
           alert(`There has been a problem with your fetch operation: ${error}`);
         });
     }
@@ -78,7 +74,5 @@ const ProductTable: React.FC<tablePage> = (props) => {
     </div>
   );
 };
-
-// https://reqres.in/api/products?per_page=5&page=2
 
 export default ProductTable;
