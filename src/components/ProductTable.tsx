@@ -28,12 +28,22 @@ const ProductTable: React.FC<CreateTable> = (props) => {
           alert(`There has been a problem with your fetch operation: ${error}`);
         });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.fetchExactProduct]);
 
   useEffect(() => {
     fetch(`https://reqres.in/api/products?per_page=5&page=${props.tablePage}`)
-      .then((res) => res.json())
-      .then((data) => setProducts((prev) => data.data));
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => setProducts((prev) => data.data))
+      .catch((error) => {
+        console.error(error);
+        alert(`There has been a problem with your fetch operation: ${error}`);
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.tablePage]);
 
@@ -43,9 +53,15 @@ const ProductTable: React.FC<CreateTable> = (props) => {
         <Table sx={{ minWidth: 280 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell align="left">Name</TableCell>
-              <TableCell align="center">ID</TableCell>
-              <TableCell align="center">Year</TableCell>
+              <TableCell align="left">
+                <strong>Name</strong>
+              </TableCell>
+              <TableCell align="center">
+                <strong>ID</strong>
+              </TableCell>
+              <TableCell align="center">
+                <strong>Year</strong>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody className="table--body">
