@@ -5,7 +5,7 @@ import { PassProductData } from "../interfaces/PassProductData";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 const Modal: React.FC<PassProductData> = (props) => {
   return (
-    <div className="modal--bg" style={{ backgroundColor: `${props.color}30` }}>
+    <div className="modal--bg" style={{ backgroundColor: `${props.color}40` }}>
       <div className="modal--close">
         <CloseRoundedIcon onClick={props.toggleModal} />
       </div>
@@ -16,18 +16,26 @@ const Modal: React.FC<PassProductData> = (props) => {
         }}
       >
         <ul>
-          <li>Name:</li>
-          <li>ID:</li>
-          <li>Year:</li>
-          <li>Color:</li>
-          <li>Pantone value:</li>
-        </ul>
-        <ul>
-          <li> {handleProductName(props.name)}</li>
-          <li>{props.id}</li>
-          <li>{props.year}</li>
-          <li>{props.color}</li>
-          <li>{props.pantone_value}</li>
+          <li>
+            <span>Name:</span>
+            <span>{handleProductName(props.name)}</span>
+          </li>
+          <li>
+            <span>ID:</span>
+            <span>{props.id}</span>
+          </li>
+          <li>
+            <span>Year:</span>
+            <span>{props.year}</span>
+          </li>
+          <li>
+            <span>Color:</span>
+            <span>{props.color}</span>
+          </li>
+          <li>
+            <span>Pantone value:</span>
+            <span>{props.pantone_value}</span>
+          </li>
         </ul>
       </div>
     </div>

@@ -10,6 +10,8 @@ const PaginationEl: React.FC<PassProductsCount> = (props) => {
     setPaginationPages((prev) => paginationElems(props.productsCount));
   }, [props.productsCount]);
 
+  console.log(props.productsCount);
+
   const changePage: (
     event: React.ChangeEvent<unknown>,
     page: number
