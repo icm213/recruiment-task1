@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { paginationElems } from "../methods/paginationElems";
 import { Pagination } from "@mui/material";
-import { productsCount } from "../interfaces/productsCount";
+import { PassProductsCount } from "../interfaces/PassProductsCount";
 
-const PaginationEl: React.FC<productsCount> = (props) => {
+const PaginationEl: React.FC<PassProductsCount> = (props) => {
   const [paginationPages, setPaginationPages] = useState<number>(0);
 
   useEffect(() => {
