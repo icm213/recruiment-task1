@@ -1,8 +1,8 @@
 import React from "react";
 import { handleProductName } from "../methods/handleProductName";
-
 import { PassProductData } from "../interfaces/PassProductData";
 import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+
 const Modal: React.FC<PassProductData> = (props) => {
   return (
     <div className="modal--bg" style={{ backgroundColor: `${props.color}40` }}>
