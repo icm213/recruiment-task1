@@ -9,20 +9,16 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import axios from "axios";
 
 const ProductTable: React.FC<CreateTable> = (props) => {
   const [products, setProducts] = useState<PassProductData[]>([]);
 
   useEffect(() => {
     if (props.fetchExactProduct) {
-      fetch(`https://reqres.in/api/products?id=${props.fetchExactProduct}`)
-        .then((res) => {
-          if (!res.ok) {
-            throw new Error(`${res.status}`);
-          }
-          return res.json();
-        })
-        .then((data) => setProducts((prev) => [data.data]))
+      axios
+        .get(`https://reqres.in/api/products?id=${props.fetchExactProduct}`)
+        .then((res) => setProducts((prev) => [res.data.data]))
         .catch((error) => {
           console.error(error);
           alert(`There has been a problem with your fetch operation: ${error}`);
@@ -32,14 +28,9 @@ const ProductTable: React.FC<CreateTable> = (props) => {
   }, [props.fetchExactProduct]);
 
   useEffect(() => {
-    fetch(`https://reqres.in/api/products?per_page=5&page=${props.tablePage}`)
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => setProducts((prev) => data.data))
+    axios
+      .get(`https://reqres.in/api/products?per_page=5&page=${props.tablePage}`)
+      .then((res) => setProducts((prev) => res.data.data))
       .catch((error) => {
         console.error(error);
         alert(`There has been a problem with your fetch operation: ${error}`);
@@ -68,11 +59,11 @@ const ProductTable: React.FC<CreateTable> = (props) => {
             {products.map((product) => {
               return (
                 <TableRow
+                  key={product.id}
                   onClick={() => {
                     props.toggleModal();
                     props.passProduct(product);
                   }}
-                  key={product.id}
                   className="table--item"
                   style={{ backgroundColor: `${product.color}70` }}
                 >
