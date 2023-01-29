@@ -5,5 +5,4 @@ export interface CreateTable {
   productsCount: number;
   passProduct: (productObj: PassProductData) => void;
   toggleModal: () => void;
-  handleCurrentAmountOfProducts: (productsAmount: number) => void;
 }

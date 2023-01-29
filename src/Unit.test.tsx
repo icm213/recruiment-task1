@@ -4,29 +4,29 @@ import { paginationElems } from "./methods/paginationElems";
 
 //===  handleProductName Tests ===//
 
-test("all words of product name should start with uppercase letter", () => {
+test("all words of product name should start with capital letter", () => {
   const productNamePhrase: string = handleProductName("dog food");
   expect(productNamePhrase).toBe<string>("Dog Food");
 });
 
-test("all words of product name should start with uppercase letter", () => {
+test("all words of product name should start with capital letter", () => {
   const productNamePhrase: string = handleProductName("coat - red");
   expect(productNamePhrase).toBe<string>("Coat - Red");
 });
 
-test("all words of product name should start with uppercase letter", () => {
+test("all words of product name should start with capital letter", () => {
   const productNamePhrase: string = handleProductName("caRpEt");
   expect(productNamePhrase).toBe<string>("Carpet");
 });
 
-test("all words of product name should start with uppercase letter", () => {
+test("all words of product name should start with capital letter", () => {
   const productNamePhrase: string = handleProductName(
     "zircon encrusted tweezers for sale"
   );
   expect(productNamePhrase).toBe<string>("Zircon Encrusted Tweezers For Sale");
 });
 
-test("all words of product name should start with uppercase letter", () => {
+test("all words of product name should start with capital letter", () => {
   const productNamePhrase: string = handleProductName("CHEESE & FISH");
   expect(productNamePhrase).toBe<string>("Cheese & Fish");
 });
