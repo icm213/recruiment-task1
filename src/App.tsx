@@ -3,7 +3,6 @@ import PaginationEl from "./components/PaginationEl";
 import ProductTable from "./components/ProductTable";
 import Modal from "./components/Modal";
 import Input from "./components/Input";
-import "./styles/index.scss";
 import { Button } from "@mui/material";
 import { PassProductData } from "./interfaces/PassProductData";
 
@@ -20,6 +19,7 @@ const App: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [inputValue, setInputValue] = useState<string>("");
   const [fetchExactProduct, setFetchExactProduct] = useState<number>(0);
+  const [pagination, setPagination] = useState<boolean>(true);
 
   useEffect(() => {
     fetch("https://reqres.in/api/products")
@@ -58,14 +58,22 @@ const App: React.FC = () => {
     event.preventDefault();
     setFetchExactProduct((prev) => parseFloat(inputValue));
     setInputValue((prev) => "");
+    setPagination((prev) => false);
   };
 
   return (
     <div className="wraper">
       <form className="input--wraper" onSubmit={handleClickForm}>
         <Input handleChange={handleChange} inputValue={inputValue} />
-        <Button variant="outlined" type="submit">
+        <Button className="button--submit" variant="contained" type="submit">
           Search
+        </Button>
+        <Button
+          variant="outlined"
+          type="button"
+          onClick={() => window.location.reload()}
+        >
+          Reload
         </Button>
       </form>
 
@@ -76,10 +84,12 @@ const App: React.FC = () => {
         toggleModal={toggleModal}
         productsCount={totalProducts}
       />
-      <PaginationEl
-        displayCurrentPage={displayCurrentPageFromPagination}
-        productsCount={totalProducts}
-      />
+      {pagination && (
+        <PaginationEl
+          displayCurrentPage={displayCurrentPageFromPagination}
+          productsCount={totalProducts}
+        />
+      )}
       {showModal && <Modal toggleModal={toggleModal} {...currentProduct} />}
     </div>
   );
