@@ -5,6 +5,7 @@ import Modal from "./components/Modal";
 import Input from "./components/Input";
 import { Button } from "@mui/material";
 import { PassProductData } from "./interfaces/PassProductData";
+import axios from "axios";
 
 const App: React.FC = () => {
   const [totalProducts, setTotalProducts] = useState<number>(0);
@@ -22,15 +23,10 @@ const App: React.FC = () => {
   const [pagination, setPagination] = useState<boolean>(true);
 
   useEffect(() => {
-    fetch("https://reqres.in/api/products")
+    axios
+      .get("https://reqres.in/api/products")
       .then((res) => {
-        if (!res.ok) {
-          throw new Error(`${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        setTotalProducts((prev) => data.total);
+        setTotalProducts((prev) => res.data.total);
       })
       .catch((error) => {
         console.error(error);
