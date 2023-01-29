@@ -15,7 +15,7 @@ const ProductTable: React.FC<CreateTable> = (props) => {
 
   useEffect(() => {
     if (props.fetchExactProduct) {
-      fetch(`https://reqres.in/api/products/${props.fetchExactProduct}`)
+      fetch(`https://reqres.in/api/products?id=${props.fetchExactProduct}`)
         .then((res) => {
           if (!res.ok) {
             throw new Error(`${res.status}`);
