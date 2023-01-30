@@ -1,6 +1,8 @@
 @import "./mixins/flexBox.scss";
 .input--wraper {
-  @include flexBox(row, space-evenly, stretch, 1rem);
+  @include flexBox(row, center, stretch, 1rem);
+  min-width: 55vw;
+  width: 80vw;
   input {
     width: 7rem;
     color: rgb(49, 49, 49);
