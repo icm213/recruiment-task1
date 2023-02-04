@@ -9,7 +9,7 @@ const Input: React.FC<PassInputData> = (props) => {
       value={props.inputValue}
       type="number"
       label="Type Product ID:"
-      InputProps={{ inputProps: { min: 1, max: 12 } }}
+      InputProps={{ inputProps: { min: 1, max: props.productsCount } }}
     />
   );
 };
