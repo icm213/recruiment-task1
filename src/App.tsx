@@ -60,7 +60,11 @@ const App: React.FC = () => {
   return (
     <div className="wraper">
       <form className="input--wraper" onSubmit={handleClickForm}>
-        <Input handleChange={handleChange} inputValue={inputValue} />
+        <Input
+          handleChange={handleChange}
+          inputValue={inputValue}
+          productsCount={totalProducts}
+        />
         <Button className="button--submit" variant="contained" type="submit">
           Search
         </Button>
