@@ -3,6 +3,8 @@
     "jsx": "react",
     "moduleResolution": "node",
     "module": "commonjs",
+    "esModuleInterop": true,
+
     "types": [
       "node",
       "@wdio/globals/types",
