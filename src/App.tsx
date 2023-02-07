@@ -65,7 +65,12 @@ const App: React.FC = () => {
           inputValue={inputValue}
           productsCount={totalProducts}
         />
-        <Button className="button--submit" variant="contained" type="submit">
+        <Button
+          className="button--submit"
+          variant="contained"
+          type="submit"
+          disabled={!inputValue ? true : false}
+        >
           Search
         </Button>
         <Button
