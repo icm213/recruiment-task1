@@ -1,4 +1,4 @@
-@wip
+# @wip
 
 Feature: Modal shows up after product is clicked
 
