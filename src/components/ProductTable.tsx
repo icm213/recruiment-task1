@@ -10,19 +10,17 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import axios from "axios";
+import ApiClient from "../api/api-client";
+
+const apiClient = new ApiClient(`https://reqres.in/api`);
 
 const ProductTable: React.FC<CreateTable> = (props) => {
   const [products, setProducts] = useState<PassProductData[]>([]);
 
   useEffect(() => {
     if (props.fetchExactProduct) {
-      axios
-        .get(`https://reqres.in/api/products?id=${props.fetchExactProduct}`)
-        .then((res) => setProducts((prev) => [res.data.data]))
-        .catch((error) => {
-          console.error(error);
-          alert(`There has been a problem with your fetch operation: ${error}`);
-        });
+      const fetchedProducts = apiClient.getProduct(props.fetchExactProduct);
+      fetchedProducts.then((data) => setProducts([data]));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.fetchExactProduct]);
