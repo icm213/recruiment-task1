@@ -5,7 +5,10 @@ import Modal from "./components/Modal";
 import Input from "./components/Input";
 import { Button } from "@mui/material";
 import { PassProductData } from "./interfaces/PassProductData";
-import axios from "axios";
+// import axios from "axios";
+import ApiClient from "./api/api-client";
+
+const apiClient = new ApiClient(`https://reqres.in/api`);
 
 const App: React.FC = () => {
   const [totalProducts, setTotalProducts] = useState<number>(0);
@@ -23,15 +26,8 @@ const App: React.FC = () => {
   const [pagination, setPagination] = useState<boolean>(true);
 
   useEffect(() => {
-    axios
-      .get("https://reqres.in/api/products")
-      .then((res) => {
-        setTotalProducts((prev) => res.data.total);
-      })
-      .catch((error) => {
-        console.error(error);
-        alert(`There has been a problem with your fetch operation: ${error}`);
-      });
+    const amountOfProduct = apiClient.getAmountOfProducts();
+    amountOfProduct.then((total) => setTotalProducts(total));
   }, []);
 
   const displayCurrentPageFromPagination = (page: number) => {
