@@ -24,14 +24,14 @@ export default class ApiClient {
     }
   }
 
-  async getProducts(): Promise<Product[]> {
+  async getAmountOfProducts(): Promise<number> {
     const url = `${this.baseURL}/products`;
     try {
       const response = await axios.get(url);
-      return response.data as Product[];
+      return response.data.total;
     } catch (error) {
       handleApiError(error);
-      return [];
+      return;
     }
   }
 
