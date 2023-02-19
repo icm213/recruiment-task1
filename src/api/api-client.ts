@@ -24,6 +24,17 @@ export default class ApiClient {
     }
   }
 
+  async getProductsPerPage(page: number): Promise<Product[] | null> {
+    const url = `${this.baseURL}/products?per_page=5&page=${page}`;
+    try {
+      const response = await axios.get(url);
+      return response.data.data;
+    } catch (error) {
+      handleApiError(error);
+      return null;
+    }
+  }
+
   async getAmountOfProducts(): Promise<number> {
     const url = `${this.baseURL}/products`;
     try {
