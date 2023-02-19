@@ -9,7 +9,6 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import axios from "axios";
 import ApiClient from "../api/api-client";
 
 const apiClient = new ApiClient(`https://reqres.in/api`);
@@ -26,13 +25,9 @@ const ProductTable: React.FC<CreateTable> = (props) => {
   }, [props.fetchExactProduct]);
 
   useEffect(() => {
-    axios
-      .get(`https://reqres.in/api/products?per_page=5&page=${props.tablePage}`)
-      .then((res) => setProducts((prev) => res.data.data))
-      .catch((error) => {
-        console.error(error);
-        alert(`There has been a problem with your fetch operation: ${error}`);
-      });
+    const productsPerPage = apiClient.getProductsPerPage(props.tablePage);
+    productsPerPage.then((data) => setProducts(data));
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.tablePage]);
 
